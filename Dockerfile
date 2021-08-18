@@ -20,11 +20,12 @@ RUN dpkg --add-architecture i386 && \
     apt -y full-upgrade && apt clean && rm -rf /var/lib/apt/lists/* && \
     wget -O- https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz | tar -xz -C /root/ && mv /root/noVNC-* /root/novnc && \
     wget -O- https://github.com/novnc/websockify/archive/v0.10.0.tar.gz | tar -xz -C /root/ && mv /root/websockify-* /root/novnc/utils/websockify && \
-    sed -i 's#proxy_pid="$!"#proxy_pid="$!"\necho ${proxy_pid} > /var/run/websockify.pid #g' /root/novnc/utils/launch.sh
+    sed -i 's#proxy_pid="$!"#proxy_pid="$!"\necho ${proxy_pid} > /var/run/websockify.pid #g' /root/novnc/utils/launch.sh && \
+    cp /bin/python3.8 /bin/python3
 
 ADD monit.conf /etc/monit/conf.d/monit.conf
 ADD mservice.sh /root/mservice.sh
 
 WORKDIR /root/
 
-CMD <monit>
+CMD <"/bin/monit","-I">
