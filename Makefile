@@ -1,8 +1,8 @@
 build:
-	docker build -t wine-x11-novnc-docker .
+	docker build -t wine-novnc .
 
 run: build
-	docker run --rm -p 18080:8080 wine-x11-novnc-docker
+	docker run --rm -p 18080:8080 wine-novnc
 
 shell: build
-	docker run --rm -ti -p 18080:8080 wine-x11-novnc-docker bash
+	docker run --rm -ti -p 18080:8080 wine-novnc bash
