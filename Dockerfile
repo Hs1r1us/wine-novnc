@@ -39,4 +39,4 @@ ADD mservice.sh /root/mservice.sh
 
 WORKDIR /root/
 
-CMD ["/bin/monit","-I"]
+CMD ["/bin/bash","-c","set -e && /bin/monit","-I"]
